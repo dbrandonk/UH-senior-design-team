@@ -76,8 +76,8 @@ protected:
     float               _pitch_factor[AP_MOTORS_MAX_NUM_MOTORS]; // each motors contribution to pitch
     float               _yaw_factor[AP_MOTORS_MAX_NUM_MOTORS];  // each motors contribution to yaw (normally 1 or -1)
     float               _thrust_rpyt_out[AP_MOTORS_MAX_NUM_MOTORS]; // combined roll, pitch, yaw and throttle outputs to motors in 0~1 range
-    unsigned short      _rc_in_thruster_values[AP_MOTORS_MAX_NUM_MOTORS]; // values that should go to the outputs of the thrustes
-    bool                _direct_thruster_control_status; // if we are controlling the sub thrusters directly
+    unsigned short      _rc_in_motor_values[AP_MOTORS_MAX_NUM_MOTORS]; // values that should go to the outputs of the thrustes
+    bool                _direct_motor_control_status; // if we are controlling the sub motors directly
     uint8_t             _test_order[AP_MOTORS_MAX_NUM_MOTORS];  // order of the motors in the test sequence
     motor_frame_class   _last_frame_class; // most recently requested frame class (i.e. quad, hexa, octa, etc)
     motor_frame_type    _last_frame_type; // most recently requested frame type (i.e. plus, x, v, etc)

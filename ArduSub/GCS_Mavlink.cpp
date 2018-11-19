@@ -50,7 +50,7 @@ NOINLINE void Sub::send_heartbeat(mavlink_channel_t chan)
     switch (control_mode) {
     case AUTO:
     case GUIDED:
-    case THRUSTER_DIRECT:
+    case MOTOR_DIRECT:
     case CIRCLE:
     case POSHOLD:
         base_mode |= MAV_MODE_FLAG_GUIDED_ENABLED;

@@ -1,20 +1,20 @@
 #include "Sub.h"
 
 // stabilize_init - initialise stabilize controller
-bool Sub::thruster_direct_init()
+bool Sub::motor_direct_init()
 {
     // set target altitude to zero for reporting
     pos_control.set_alt_target(0);
 
-    //change  if we are controlling the sub thrusters directly
-    motors.change_thruster_control_status(true);
+    //change  if we are controlling the sub motors directly
+    motors.direct_motor_control_mode(true);
 
     return true;
 }
 
 // stabilize_run - runs the main stabilize controller
 // should be called at 100hz or more
-void Sub::thruster_direct_run()
+void Sub::motor_direct_run()
 {
      // if not armed set throttle to zero and exit immediately
     if (!motors.armed()) {
@@ -35,6 +35,6 @@ void Sub::thruster_direct_run()
 
     rc_pwm_input = rc_input_values;
 
-    motors.direct_thruster_control(rc_pwm_input);
+    motors.direct_motor_control(rc_pwm_input);
 
 }

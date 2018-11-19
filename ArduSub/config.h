@@ -178,7 +178,7 @@
 # define FLIGHT_MODE_3                  ALT_HOLD
 #endif
 #ifndef FLIGHT_MODE_4
-# define FLIGHT_MODE_4                  THRUSTER_DIRECT
+# define FLIGHT_MODE_4                  MOTOR_DIRECT
 #endif
 #ifndef FLIGHT_MODE_5
 # define FLIGHT_MODE_5                  STABILIZE

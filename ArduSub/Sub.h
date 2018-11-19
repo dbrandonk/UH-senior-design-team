@@ -598,8 +598,8 @@ private:
 
     bool stabilize_init(void);
     void stabilize_run();
-    bool thruster_direct_init(void);
-    void thruster_direct_run();
+    bool motor_direct_init(void);
+    void motor_direct_run();
     bool manual_init(void);
     void manual_run();
     void failsafe_sensors_check(void);

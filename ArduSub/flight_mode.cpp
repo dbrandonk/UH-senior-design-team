@@ -16,6 +16,8 @@ bool Sub::set_mode(control_mode_t mode, mode_reason_t reason)
         return true;
     }
 
+    motors.change_thruster_control_status(false);
+
     switch (mode) {
     case ACRO:
         success = acro_init();

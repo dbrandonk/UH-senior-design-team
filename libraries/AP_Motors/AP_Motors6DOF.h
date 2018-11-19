@@ -41,6 +41,12 @@ public:
     // output_to_motors - sends minimum values out to the motors
     void output_to_motors() override;
 
+    //change  if we are controlling the sub thrusters directly
+    void change_thruster_control_status(bool control_status);
+
+    //Give direct control of motors.
+    void direct_thruster_control(unsigned short* rc_pwm_input);
+
     // var_info for holding Parameter information
     static const struct AP_Param::GroupInfo        var_info[];
 

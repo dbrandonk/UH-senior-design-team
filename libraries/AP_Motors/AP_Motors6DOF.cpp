@@ -192,6 +192,27 @@ void AP_Motors6DOF::output_min()
     hal.rcout->push();
 }
 
+//change  if we are controlling the sub thrusters directly
+void AP_Motors6DOF::change_thruster_control_status(bool control_status)
+{
+  _direct_thruster_control_status = control_status;
+  return;
+}
+
+//Give direct control of motors.
+void AP_Motors6DOF::direct_thruster_control(unsigned short* rc_pwm_input)
+{
+
+  int8_t i;
+
+  // Calculate final output for each motor
+  for (i=0; i<AP_MOTORS_MAX_NUM_MOTORS; i++) {
+      if (motor_enabled[i]) {
+          _rc_in_thruster_values[i] = rc_pwm_input[i];
+      }
+  }
+}
+
 int16_t AP_Motors6DOF::calc_thrust_to_pwm(float thrust_in) const
 {
     return constrain_int16(1500 + thrust_in * 400, _throttle_radio_min, _throttle_radio_max);
@@ -224,11 +245,19 @@ void AP_Motors6DOF::output_to_motors()
     case THROTTLE_UNLIMITED:
     case SPOOL_DOWN:
         // set motor output based on thrust requests
-        for (i=0; i<AP_MOTORS_MAX_NUM_MOTORS; i++) {
-            if (motor_enabled[i]) {
-                motor_out[i] = calc_thrust_to_pwm(_thrust_rpyt_out[i]);
-            }
-        }
+        if(_direct_thruster_control_status){
+          for (i=0; i<AP_MOTORS_MAX_NUM_MOTORS; i++) {
+              if (motor_enabled[i]) {
+                  motor_out[i] = _rc_in_thruster_values[i];
+              }
+          }
+        } else {
+          for (i=0; i<AP_MOTORS_MAX_NUM_MOTORS; i++) {
+              if (motor_enabled[i]) {
+                  motor_out[i] = calc_thrust_to_pwm(_thrust_rpyt_out[i]);
+                }
+              }
+      }
         break;
     }
 

@@ -25,15 +25,12 @@ void Sub::motor_direct_run()
 
     motors.set_desired_spool_state(AP_Motors::DESIRED_THROTTLE_UNLIMITED);
 
-    unsigned short* rc_pwm_input;
-    unsigned short rc_input_values[8];
+    unsigned short rc_pwm_input[NUM_RC_CHANNELS];
 
-    for (int i=0; i<8; i++) {
-        rc_input_values[i] = RC_Channels::rc_channel(i)->read();
+    for (int i=0; i<NUM_RC_CHANNELS; i++) {
+        rc_pwm_input[i] = RC_Channels::rc_channel(i)->read();
 
     }
-
-    rc_pwm_input = rc_input_values;
 
     motors.direct_motor_control(rc_pwm_input);
 
